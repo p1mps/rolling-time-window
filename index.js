@@ -13,7 +13,6 @@ const generateStats = (data, sum, min, max) => {
 }
 
 const parseLine = (line) => {
-
   const data = line.split('\t')
 
   if (data.length != 2 || !data[0] || !data[1]) {
