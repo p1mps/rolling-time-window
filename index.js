@@ -1,4 +1,4 @@
-const printTable = require('./print-table')
+const tableParser = require('./table-parser')
 const argv = require('yargs').argv
 
 const printUsage = () => {
@@ -7,11 +7,8 @@ const printUsage = () => {
 }
 
 const parseArgs = (argv) => {
+  // tau is optional and set default to 60
   let tau = 60
-
-  if (argv.file == null) {
-    return printUsage()
-  }
 
   if (argv.tau != null) {
     tau = argv.tau
@@ -25,6 +22,10 @@ const parseArgs = (argv) => {
 
 const args = parseArgs(argv)
 
-if (args) {
-  printTable.printTable(args.file, args.tau)
+// file is mandatory
+if (!args.file) {
+  printUsage()
+  process.exit(0)
 }
+
+tableParser.printTable(args.file, args.tau)
