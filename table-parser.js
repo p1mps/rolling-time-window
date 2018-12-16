@@ -1,14 +1,15 @@
 const fs = require('fs')
 const consoleTable = require('console.table');
 
-const generateStats = (data, sum, min, max) => {
+const generateStats = (data, counter, sum, min, max) => {
 
   return {
-    'timestamp': data.timestamp,
-    'value': data.value,
-    'sum': data.value + sum,
-    'min': (data.value < min) ? data.value : min,
-    'max': (data.value >= max) ? data.value : max
+    'Time': data.Time,
+    'Value': data.Value,
+    'N_0': counter,
+    'Roll_Sum': data.Value + sum,
+    'Min_Value': (data.Value < min) ? data.Value : min,
+    'Max_Value': (data.Value >= max) ? data.Value : max
   }
 }
 
@@ -20,8 +21,8 @@ const parseLine = (line) => {
   }
 
   return {
-    'timestamp': Number.parseInt(data[0]),
-    'value': Number.parseFloat(data[1])
+    'Time': Number.parseInt(data[0]),
+    'Value': Number.parseFloat(data[1])
   }
 }
 
@@ -40,9 +41,10 @@ const printTable = (file, tau) => {
       if (line !== '' && counter < tau) {
         const parsedLine = parseLine(line)
         if (!previousStats) {
-          stats = generateStats(parsedLine, 0, Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER)
+          //const generateStats = (data, counter, sum, min, max) => {
+          stats = generateStats(parsedLine, counter, 0, Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER)
         } else {
-          stats = generateStats(parsedLine, previousStats.sum, previousStats.min, previousStats.max)
+          stats = generateStats(parsedLine, counter, previousStats.Roll_Sum, previousStats.Min_Value, previousStats.Max_Value)
         }
         counter++
         previousStats = stats
