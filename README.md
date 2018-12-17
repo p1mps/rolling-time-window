@@ -5,7 +5,7 @@ Rolling time window implementation in nodejs
 v11.1.0
 
 ## To run the script:
-- npm start -- -file (path to the data file) [--tau (time window size)]
+- npm start -- --file (path to the data file) [--tau (time window size)]
 - file is the only mandatory parameter, tau defaults to 60 if omitted
 
 ## Dependencies:

@@ -3,7 +3,7 @@ const argv = require('yargs').argv
 
 const printUsage = () => {
   console.log('Usage:')
-  console.log('npm start -- -file (path to the data file) [--tau (time window size)]')
+  console.log('npm start -- --file (path to the data file) [--tau (time window size)]')
 }
 
 const parseArgs = (argv) => {
